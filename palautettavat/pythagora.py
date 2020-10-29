@@ -16,7 +16,7 @@ while (counter<_MAXTRYLIMIT):
     print("anna ensimmäinen kateetti:")
     num=input()
     try:
-        kateetti1 = int(num)
+        kateetti1 = float(num)
     except NameError:
         print("NameError")
     except ValueError:
@@ -33,7 +33,7 @@ while (counter<_MAXTRYLIMIT):
     print("     anna toinen kateetti:")
     num=input()
     try:
-        kateetti2 = int(num)
+        kateetti2 = float(num)
     except NameError:
         print("NameError")
     except ValueError:
