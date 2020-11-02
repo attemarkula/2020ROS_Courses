@@ -11,13 +11,14 @@ global kateetti1
 global kateetti2
 global hypotenuusa
 
-def helppo():
-    """
-    helppo: 
-    kysy ensin kayttajalta halutaanko laskea hypotenuusa vai katetti sen 
-    jälkeen kysy joko kaksi katettia tai kateetti ja hypotenuusa.
-    """
-    print(__name__)
+def helppo(mode="print"):
+    if mode=="print":
+      print ("""
+      helppo: 
+      kysy ensin kayttajalta halutaanko laskea hypotenuusa vai katetti sen 
+      jälkeen kysy joko kaksi katettia tai kateetti ja hypotenuusa.
+      """)
+
     poistu=False
     while (not poistu):
         print("Lasketaanko hypotenuusa (H) vai kateetti (K) :")
@@ -40,16 +41,17 @@ def helppo():
             poistu=False
             pass
         return(kateetti1,kateetti2)
-#def helppo() ends
+#def helppo(mode) ends
 
 def normaali():
-    """
+    print ("""
     normaali: 
     sama kuin helppo, 
     mutta kysytään myos haluaako kayttaja tietaa kolmion alan, 
     jos haluaa lasketaan myos se ja tulostetaan tulos
-    """
-    (kateetti1,kateetti2)=helppo()
+    """)
+
+    (kateetti1,kateetti2)=helppo("noprint")
     op = input("Tulostetaanko kolmion ala (K/E):")
     if (op == "K" or op == "k"):
         print("Tulos :"+str((kateetti1 * kateetti2)/2))
@@ -57,11 +59,12 @@ def normaali():
 #def normaali() ends
 
 def vaikea():
-    """
+    print (    """
     vaikea tehtävä:
     Koodi tarkastaa etta kayttaja on antanut oikean vastauksen, 
     mikali ei kysyy uudelleen saman kysymyksen
-    """
+    """ )
+
     _MAXTRYLIMIT = 5 #counter max limit
     counter=0
 
@@ -103,6 +106,6 @@ def vaikea():
 #def vaikea() ends
 
 if __name__ == "__main__":
-    #vaikea()
-    #helppo()
+#    helppo()
     normaali()
+#    vaikea()
