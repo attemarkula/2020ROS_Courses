@@ -28,6 +28,14 @@ def noppa(tahomaara):
     #print(vastaus)
     return vastaus
 
+
+
+
+
+
+
+
+
 def helppo(mode="print"):
     if mode=="print":
         print("""
@@ -44,6 +52,17 @@ def helppo(mode="print"):
     #kommentoitu, koska ei pyydetty tulostamaan
     print ("nopan tulos:"+str(np))
 #def helppo(mode) ends
+
+
+
+
+
+
+
+
+
+
+
 
 def normaali(mode="print"):
     if mode=="print":
@@ -68,6 +87,98 @@ def normaali(mode="print"):
     print("summa:"+str(summa)+", silmäluvut: ",end="")
     print (lista)
 #def normaali(mode) ends
+
+
+
+
+
+
+
+
+
+#Huom: Vaikea halutaan toteuttaa luokkien avulla
+def vaikea(mode="print"):
+    if mode=="print":
+        print("""
+#vaikea
+Sama kuin normaali, mutta tuloksen jalkeen kysy kayttajalta halutaanko heittaa uudelleen.
+entterilla uusi heitto
+muuta noppa kysyy uudelleen tahot
+muuta noppien lukumaara kysyy noppaluvun uudelleen
+lopeta lopettaa ohjelman
+""")
+
+    loop=True
+    loopcounter=0
+    nopatlkm=0
+    vaihda_tahot=True
+    vaihda_nopat=True
+    komento=False
+    uusikierros=False
+
+    while loop:
+        loop=False
+        loopcounter+=1
+        if loopcounter>20:
+            print("liian monta yritystä, pakollinen interventio")
+            loop=False
+            break
+
+        if vaihda_tahot:
+            tahot=int(input('Montako tahoa nopassa:'))
+            #tahot=20
+
+        if vaihda_nopat:
+            nopatlkm=int(input('Montako noppaa:'))
+            #nopatlkm=5
+
+        if vaihda_tahot or vaihda_nopat or uusikierros:
+            komento=False
+            vaihda_nopat=False
+            vaihda_tahot=False
+            uusikierros=False
+            noppalistaolio = noppalistaluokka()
+            for var in range(nopatlkm):
+                noppalistaolio.sido(noppaluokka(tahot))
+            for var in range(1,noppalistaolio.count+1):
+                print(var,noppalistaolio.showone(var-1).katso(), sep=":", end=" ")
+            print("")
+
+        # Hymmm. jos komento on "entteri", niin se ei ole False.
+        if komento==False:
+            print("heitetäänkö uudelleen tai muutetaanko (taho/lukumäärä/lopeta/uudelleen) :",end="")
+            komento=input()
+            if komento=="": komento="uudelleen"
+
+        if komento:
+            komento=komento.lower()
+            if (komento=="lopeta"):
+                loop=False
+                komento=False
+            elif (komento=="lukumaara") or (komento=="lukumäärä") or komento=="muuta noppien lukumaara":
+                vaihda_nopat=True
+                loop=True
+                komento=False
+            elif (komento=="taho" or komento=="tahot" or komento=="muuta noppa"):
+                vaihda_tahot=True
+                loop=True
+                komento=False
+            elif (komento=="uudelleen"):
+                loop=True
+                vaihda_tahot=False
+                vaihda_nopat=False
+                uusikierros=True
+                komento=False
+            else:
+                print("komento "+str(komento)+" ei ole tuttu, tarkasta kirjoitusmuoto")
+                loop=True
+                komento=False
+        pass
+    pass
+
+        
+
+#def vaikea(mode) ends
 
 class noppaluokka(object):
     """
@@ -99,9 +210,21 @@ class noppaluokka(object):
         """
         tulosta nopan arvo
         """
-        print("katso: "+str(self.arvo))
+        #print("katso: "+str(self.arvo))
         return self.arvo
-
+    
+    def kysy(self, parameter_list):
+        """
+        kysy tahojen määrä
+        """
+        self.tahot = int(input('Montako tahoa nopassa:'))
+    
+    def muutatahot(self,tahot):
+        """
+        muuta tahojen määrä
+        """
+        self.tahot = tahot
+        return self.tahot
     pass
 #class noppaluokka(object)
 
@@ -111,14 +234,14 @@ class noppalistaluokka(object):
     """
     def __init__(self):
         """
-        create and zero
+        luo ja nollaa
         """
         self.count=0
         self.noppalista=[]
 
     def sido(self,noppa):
         """
-        append list
+        lisää noppa listaan
         """
         self.noppalista.append(noppa)
         self.count+=1
@@ -135,74 +258,24 @@ class noppalistaluokka(object):
         #huom: noppa tuhoutuu kun ei enää käytössä.
         return poisnoppa
 
-    def show(self,num):
+    def showone(self,num):
         """
-        show
+        palauta pointteri yhteen lueteltuun noppa objektiin
         """
         return self.noppalista[num]
     pass
 #class noppalistaluokka(object) ends
 
-
-def vaikea(mode="print"):
-    if mode=="print":
-        print(
-"""
-#vaikea
-Sama kuin normaali, mutta tuloksen jalkeen kysy kayttajalta halutaanko heittaa uudelleen.
-entterilla uusi heitto
-muuta noppa kysyy uudelleen tahot
-muuta noppien lukumaara kysyy noppaluvun uudelleen
-lopeta lopettaa ohjelman
-""")
-
-    #nopatlkm=int(input('Montako noppaa:'))
-    nopatlkm=5
-    #tahot=int(input('Montako tahoa nopassa:'))
-    tahot=100
-
-    noppalistaolio = noppalistaluokka()
-
-    #testcase luo alkuun yksi noppa
-    #noppalistaolio.sido(noppaluokka(2))
-
-    for var in range(nopatlkm):
-        noppalistaolio.sido(noppaluokka(tahot))
-
-    #testcase luo loppuun yksi noppa
-    #noppalistaolio.sido(noppaluokka(4))
-
-    #testcase luo tulosta tulokset
-    for var in range(noppalistaolio.count):
-        noppalistaolio.show(var).katso()
-
-    kysymys= input("operaatio(muuta noppa/muuta lukumäärä/lopeta")
-    #print("noppalista sisältää "+str(noppalistaolio.count)+" noppaa")
-    #for var in range(noppalistaolio.count):
-    #    noppalistaolio.vapauta(0)
-    #    #vapauta aina ensimmäinen noppa, koska vapautus pienentää listaa yhdellä
-
-    #print("tuhoutuu:")
-    #noppalistaolio.vapauta(3)
-    #print("ei tuhoutuu:")
-    #np=noppalistaolio.vapauta(2)
-    #print("done")
-    
-    #print("tuhotaan:");    np="";    print("tuhoutui:")
-    #print("noppalista sisältää "+str(noppalistaolio.count)+" noppaa")
-
-"""
-    for target_list in noppalista:
-        print("list:"+str(target_list.arvo))
-        pass
-
-    print ("noppaluokka: "+str(noppaolio.katso()))
-"""
-#def vaikea(mode) ends
+def cls():
+    """
+    tyhjennä terminaali tekstistä
+    """
+    print(chr(27) + "[2J")
+    #escape sequence stringit, eivät ehkä ole ROS1/2 yhteensopivia, mutta ovat noppa yhteensopivia
 
 if __name__ == "__main__":
+    cls()    
     print ("")
-    print ("")
-    #helppo("noprint")
-    #normaali("noprint")
+    #helppo("print")
+    #normaali("print")
     vaikea("print")
