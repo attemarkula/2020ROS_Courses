@@ -27,20 +27,21 @@ class Robotti:
         self.vapausasteet = vapausasteet
 
     def tulosta_ominaisuus(self, ominaisuus):
-        print("req:"+str(ominaisuus))
+        print("tietokenttä:"+str(ominaisuus))
         if ominaisuus == "valmistaja":
-            print(self.valmistaja)
+            print(str(ominaisuus)+"sisältö on "+str(self.valmistaja))
             retval=self.valmistaja
         elif ominaisuus == "malli":
-            print(self.malli)
+            print(str(ominaisuus)+"sisältö on "+str(self.malli))
             retval=self.malli
         elif ominaisuus == "paino":
-            print(self.paino)
+            print(str(ominaisuus)+"sisältö on "+str(self.paino))
             retval=self.paino
         elif ominaisuus == "vapausasteet":
-            print(self.vapausasteet)
+            print(str(ominaisuus)+"sisältö on "+str(self.vapausasteet))
             retval=self.vapausasteet
         elif ominaisuus == "kaikki":
+            print("kaikki kentät ovat:")
             print(self.valmistaja)
             print(self.malli)
             print(self.paino)
@@ -105,12 +106,14 @@ if __name__ == "__main__":
                 print("valitse robotti ensin")
                 continue
             i=0
-            for x in ["valmistaja","malli","paino","vapausasteet"]:
-                i+=1
+            for x in ["kaikki","valmistaja","malli","paino","vapausasteet"]:
                 print (i,x,sep=": ")
+                i+=1                
             
             valittu_tietue = int(input("valitse mikä näytetään: "))
-            if valittu_tietue == 1:
+            if valittu_tietue == 0:
+                tieto=robotit[valittu_robootti].tulosta_ominaisuus("kaikki")
+            elif valittu_tietue == 1:
                 tieto=robotit[valittu_robootti].tulosta_ominaisuus("valmistaja")
             elif valittu_tietue == 2:
                 tieto=robotit[valittu_robootti].tulosta_ominaisuus("malli")
