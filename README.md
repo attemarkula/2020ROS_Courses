@@ -1,3 +1,7 @@
 # ROS
 
-#v0.1
+##v0.2
+- Kaikki jutut tehdään omiin lankoihin.
+
+##v0.1
+
