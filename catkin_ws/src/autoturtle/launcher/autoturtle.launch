@@ -1,0 +1,13 @@
+<launch>
+    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim" output="screen" />
+    <node pkg="turtlesim" type="turtle_teleop_key" name="teleop" output="screen" />
+    <node pkg="autoturtle" type="randomwalker_wallavoider_node.py" name="autoturtle" output="screen" />
+</launch>
+<!--
+tests:
+    <node pkg="autoturtle" type="randomwalk_wallavoider_node.py" name="autoturtle" output="screen" />
+
+Muistivihko:
+http://wiki.ros.org/roslaunch/XML/launch
+
+-->
