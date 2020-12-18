@@ -1,3 +1,5 @@
 # ROS
 
-#v0.1
+#v0.2
+Luento 6 palautukset
+"turtle_localization"
