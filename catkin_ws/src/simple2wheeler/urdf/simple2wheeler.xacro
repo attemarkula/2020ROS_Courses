@@ -8,9 +8,6 @@
         <material>Gazebo/Orange</material>
     </gazebo>
 
- 
-<!--
--->
     <gazebo>
         <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
             <legacyMode>false</legacyMode>
@@ -81,19 +78,19 @@
         <collision name="link_right_wheel_collision">
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder length="0.04" radius="0.1"/>
+                <cylinder length="0.04" radius="0.15"/>
             </geometry>
         </collision>
         <visual>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder length="0.04" radius="0.1"/>
+                <cylinder length="0.04" radius="0.15"/>
             </geometry>
             <material name="blue"/>
         </visual>
     </link>
     <joint name="joint_right_wheel" type="continuous">
-        <origin rpy="0 0 0" xyz="-0.05 0.15 0 "/>
+        <origin rpy="0 0 0" xyz="-0.05 -0.15 0 "/>
         <child link="link_right_wheel"/>
         <parent link="link_chassis"/>
         <axis rpy="0 0 0" xyz="0 1 0"/>
@@ -110,21 +107,21 @@
         <collision name="link_left_wheel_collision">
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder length="0.04" radius="0.1"/>
+                <cylinder length="0.04" radius="0.15"/>
             </geometry>
         </collision>
         <visual>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder length="0.04" radius="0.1"/>
+                <cylinder length="0.04" radius="0.15"/>
             </geometry>
             <material name="blue"/>
         </visual>
     </link>
 
- 
-    <joint name="joint_left_wheel" type="continuous">
-        <origin rpy="0 0 0" xyz="-0.05 -0.15 0 "/>
+
+     <joint name="joint_left_wheel" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.05 0.15 0 "/>
         <child link="link_left_wheel"/>
         <parent link="link_chassis"/>
         <axis rpy="0 0 0" xyz="0 1 0"/>
