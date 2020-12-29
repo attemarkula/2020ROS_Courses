@@ -1,0 +1,49 @@
+<launch>
+    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim" output="screen" />
+    <node pkg="turtlesim" type="turtle_teleop_key" name="teleop" output="screen" />
+
+    <node pkg="turtle_localization" type="turtle_odometry.py" name="turtle_odometry" output="screen" />
+    <node pkg="turtle_localization" type="turtle2_noisy.py" name="turtle2_noisy" output="screen" />
+    <node pkg="turtle_localization" type="turtle3_filtered.py" name="turtle3_filtered" output="screen" />
+
+    <node pkg="robot_localization" type="ekf_localization_node" name="turtle_ekf_node" clear_params="true">
+        <param name="frequency" value="10.0"/>
+        <param name="timeout" value="0.2"/>
+<!-- timeout jälkeen jatka, vaikkei tullut tietoja -->        
+        <param name="two_d_mode" value="true"/>
+        <param name="publish_tf" value="true"/>
+        <param name="map_frame" value="map"/>
+
+        <param name="odom_frame" value="odom"/>
+
+        <param name="base_link_frame" value="base_link"/>
+
+        <param name="world_frame" value="odom"/>
+
+        <param name="print_diagnostics" value="true"/>
+
+        <remap from="odometry/filtered" to="odometry/filtered_twist"/>
+        <!-- 
+	Eli normaalisti nodesta tulee publish ulos johonkin niin se on eri niminen, ja remap voi ohjata putkella matsku suoraan oikeaan paikkaan.  
+	-->
+        <param name="twist0" value="turtle1/sensor/twist"/>
+        <param name="twist0_differential" value="false"/>
+
+        <rosparam param="twist0_config">[
+        false,false,false,
+        false,false,false,
+        true,false,false,
+        false,false,true,
+        false,false,false]
+        </rosparam>
+    </node>
+</launch>
+
+<!--
+    twist0_config:
+    X,Y,Z,
+    roll,pitch, yaw,
+    X`, Y`,Z`,
+    roll`, pitch`, yaw`,
+    X``,Y``,Z``
+-->
