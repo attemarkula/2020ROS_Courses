@@ -4,7 +4,23 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
   name="robotti_1">
-  <link
+   <gazebo>
+        <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+            <legacyMode>false</legacyMode>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>20</updateRate>
+            <rightJoint>r_wheel_joint</rightJoint>
+            <leftJoint>l_wheel_joint</leftJoint>
+            <wheelSeparation>0.2</wheelSeparation>
+            <wheelDiameter>0.2</wheelDiameter>
+            <torque>0.1</torque>
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>link_chassis</robotBaseFrame>
+        </plugin>
+    </gazebo>
+    <link
     name="base_link">
     <inertial>
       <origin
