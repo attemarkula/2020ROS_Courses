@@ -8,6 +8,7 @@
         <material>Gazebo/Orange</material>
     </gazebo>
 
+<!-- diff driven commandTopic on node mistä komennot luetaan, tänne ohjataan ".launch" tiedostossa data lähteestä. -->
     <gazebo>
         <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
             <legacyMode>false</legacyMode>
@@ -18,14 +19,12 @@
             <wheelSeparation>0.2</wheelSeparation>
             <wheelDiameter>0.2</wheelDiameter>
             <torque>0.1</torque>
-            <!-- Eli tämä on se mistä se luetaan, tämä ohjataan ".launch" tiedostossa. -->
             <commandTopic>cmd_vel</commandTopic>
             <odometryTopic>odom</odometryTopic>
             <odometryFrame>odom</odometryFrame>
             <robotBaseFrame>link_chassis</robotBaseFrame>
         </plugin>
     </gazebo>
-
     <link name="link_chassis">
         <pose>0 0 0.1 0 0 0</pose>
         <inertial>
