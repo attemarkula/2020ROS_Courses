@@ -8,6 +8,9 @@
         <param name="random_noise_angular" type="double" value="0.02"/>
         <param name="systemic_noise_angular" type="double" value="0.2"/>
     </node>
+
+    <node pkg="turtle_localization" type="turtle_second_odometry.py" name="turtle_odometry" output="screen" >
+
     <node pkg="turtle_localization" type="turtle2_noisy.py" name="turtle2_noisy" output="screen" />
     <node pkg="turtle_localization" type="turtle3_filtered.py" name="turtle3_filtered" output="screen" />
 
