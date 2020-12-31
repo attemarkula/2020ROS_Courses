@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+Hakee virheelle arvot suoraan parametri serveriltä.
 Lukee turtle1/pose luetut Pose tiedot
 Julkaisee turtle1/sensor/twist kautta arvot
 Tarkoitus on luoda virhe oikeaan arvoon, jotta virhe simuloi todellisen anturin luonnetta.
@@ -11,19 +12,6 @@ from turtlesim.msg import Pose
 import tf2_ros
 import turtlesim
 import random
-
-
-#random_noise_linear = 0.02
-#systemic_noise_linear = 0.2
-#random_noise_angular = 0.02
-#systemic_noise_angular = 0.2
-
-#1/10 default, jotta pysyy joukko kasassa.
-#random_noise_linear = 0.001
-#systemic_noise_linear = 0.01
-#random_noise_angular = 0.001
-#systemic_noise_angular = 0.01
-
 
 def pose_call_back(msg):
     twist_to_send = TwistWithCovarianceStamped()
@@ -46,9 +34,17 @@ if __name__ == '__main__':
     rospy.init_node("turtle_odometry")
 
     random_noise_linear     = rospy.get_param('~random_noise_linear')
+    #random_noise_linear = 0.02
+    
     systemic_noise_linear   = rospy.get_param('~systemic_noise_linear')
+    #systemic_noise_linear = 0.2
+    
     random_noise_angular    = rospy.get_param('~random_noise_angular')
+    #random_noise_angular = 0.02
+    
     systemic_noise_angular  = rospy.get_param('~systemic_noise_angular')
+    #systemic_noise_angular = 0.2
+    
 
     pub_twist = rospy.Publisher('turtle1/sensor/twist', TwistWithCovarianceStamped, queue_size=1)
     rospy.Subscriber("turtle1/pose", Pose, pose_call_back)
