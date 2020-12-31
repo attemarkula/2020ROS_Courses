@@ -2,7 +2,12 @@
     <node pkg="turtlesim" type="turtlesim_node" name="turtlesim" output="screen" />
     <node pkg="turtlesim" type="turtle_teleop_key" name="teleop" output="screen" />
 
-    <node pkg="turtle_localization" type="turtle_odometry.py" name="turtle_odometry" output="screen" />
+    <node pkg="turtle_localization" type="turtle_odometry.py" name="turtle_odometry" output="screen" >
+        <param name="random_noise_linear" type="double" value="0.02"/>
+        <param name="systemic_noise_linear" type="double" value="0.2"/>
+        <param name="random_noise_angular" type="double" value="0.02"/>
+        <param name="systemic_noise_angular" type="double" value="0.2"/>
+    </node>
     <node pkg="turtle_localization" type="turtle2_noisy.py" name="turtle2_noisy" output="screen" />
     <node pkg="turtle_localization" type="turtle3_filtered.py" name="turtle3_filtered" output="screen" />
 
