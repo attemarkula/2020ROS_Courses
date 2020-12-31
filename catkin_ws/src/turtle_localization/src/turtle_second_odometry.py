@@ -1,7 +1,13 @@
 #!/usr/bin/python3
 """
+Helppo palautus
+
+lisää toinen "sensori"  eli tee toinen turtleodometry node joka julkaisee turtle1/sensor2/twist topickiin ja lisää tämä myös filtteriin. 
+Paraneeko paikkatiedo kahdella sensorilla?
+
+
 Lukee turtle1/pose luetut Pose tiedot
-Julkaisee turtle1/sensor/twist kautta arvot
+Julkaisee turtle1/sensor2/twist kautta arvot
 Tarkoitus on luoda virhe oikeaan arvoon, jotta virhe simuloi todellisen anturin luonnetta.
 """
 
@@ -13,10 +19,10 @@ import turtlesim
 import random
 
 
-#random_noise_linear = 0.02
-#systemic_noise_linear = 0.2
-#random_noise_angular = 0.02
-#systemic_noise_angular = 0.2
+random_noise_linear = 0.02
+systemic_noise_linear = 0.2
+random_noise_angular = 0.02
+systemic_noise_angular = 0.2
 
 #1/10 default, jotta pysyy joukko kasassa.
 #random_noise_linear = 0.001
@@ -44,12 +50,6 @@ def pose_call_back(msg):
 if __name__ == '__main__':
     print("Running now.")
     rospy.init_node("turtle_odometry")
-
-    random_noise_linear     = rospy.get_param('~random_noise_linear')
-    systemic_noise_linear   = rospy.get_param('~systemic_noise_linear')
-    random_noise_angular    = rospy.get_param('~random_noise_angular')
-    systemic_noise_angular  = rospy.get_param('~systemic_noise_angular')
-
-    pub_twist = rospy.Publisher('turtle1/sensor/twist', TwistWithCovarianceStamped, queue_size=1)
+    pub_twist = rospy.Publisher('turtle1/sensor2/twist', TwistWithCovarianceStamped, queue_size=1)
     rospy.Subscriber("turtle1/pose", Pose, pose_call_back)
     rospy.spin()

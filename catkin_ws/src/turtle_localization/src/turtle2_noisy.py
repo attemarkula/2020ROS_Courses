@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-ohjaa turtlea
+ohjaa turtle2 liikkumaan /turtle1/sensor/twist mukaan.
+vaihda konnan kynän kokoa ja väriä
 """
 import rospy
 from geometry_msgs.msg import TwistWithCovarianceStamped

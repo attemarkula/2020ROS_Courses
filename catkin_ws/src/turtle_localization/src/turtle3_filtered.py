@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Lukee odometrystä ja liikuttaa turtle3:sta
-
++ lisätty toinen filtteri (helppo palautus)
 
 
 """
@@ -34,6 +34,10 @@ if __name__ == '__main__':
     rospy.init_node("turtle3_twist_remapper_node")
     #tilaa mitä kuunnellaan ja liitä käsittelijä viesteille
     rospy.Subscriber("odometry/filtered_twist", Odometry, twist_callback)
+    
+    #tilaa myös toinen lähde
+    rospy.Subscriber("odometry/filtered_twist", Odometry, twist_callback)
+
     #lähetä omat jutut turtle3:lle 
     pub_twist = rospy.Publisher('turtle3/cmd_vel', Twist, queue_size=1)
 
