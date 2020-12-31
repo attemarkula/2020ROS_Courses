@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+"""
+Lukee odometrystä ja liikuttaa turtle3:sta
+
+
+
+"""
 import rospy
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
@@ -19,10 +25,9 @@ if __name__ == '__main__':
     #määritä missä asennossa turtle on
     spawner(5.544,5.544,0,'turtle3')
     # jotta erottaa paremmin.
-    pen_setter = rospy.ServiceProxy('spawn', turtlesim.srv.Spawn)
-    pen_setter(0,0,0,5,0)
-    
-    
+    pen_setter = rospy.ServiceProxy('/turtle3/set_pen', turtlesim.srv.SetPen)
+    pen_setter(0,0,127,2,0)
+
 
 
     
